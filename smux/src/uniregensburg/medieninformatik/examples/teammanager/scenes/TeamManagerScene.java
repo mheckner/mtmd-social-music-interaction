@@ -1,37 +1,46 @@
 package uniregensburg.medieninformatik.examples.teammanager.scenes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.mt4j.AbstractMTApplication;
-import org.mt4j.components.visibleComponents.shapes.MTEllipse;
-import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
 import org.mt4j.sceneManagement.AbstractScene;
 import org.mt4j.util.MTColor;
-import org.mt4j.util.math.Vector3D;
-import processing.core.PApplet;
-import uniregensburg.medieninformatik.smux.detection.TapDownListener;
-import uniregensburg.medieninformatik.smux.detection.devicemanager.Device;
-import uniregensburg.medieninformatik.smux.detection.devicemanager.DeviceManager;
-import uniregensburg.medieninformatik.smux.detection.devicemanager.NewTapPointListener;
-import uniregensburg.medieninformatik.smux.detection.devicemanager.TapPoint;
+
+import uniregensburg.medieninformatik.examples.teammanager.model.TeamManager;
+import uniregensburg.medieninformatik.examples.teammanager.model.TeamMember;
+import uniregensburg.medieninformatik.examples.teammanager.ui_assets.TeamManagerList;
+import uniregensburg.medieninformatik.examples.teammanager.ui_assets.TeamMemberListCell;
 
 
 public class TeamManagerScene extends AbstractScene {
 
 
-	private AbstractMTApplication app = null;
+	private TeamManager teamManager = null;
+	private TeamManagerList teamList = null;
 
 	public TeamManagerScene(AbstractMTApplication mtApplication, String name) {
 		super(mtApplication, name);
-		this.app = mtApplication;
+		initModel();
 		initUI();
+	}
+	
+	private void initModel() {
+		teamManager = TeamManager.getInstance();
 	}
 
 	private void initUI() {
-		this.setClearColor(new MTColor(55, 55, 55, 255));
+		setClearColor(new MTColor(55, 55, 55, 255));
 		getCanvas().setDepthBufferDisabled(true);
+		initTeamList();
+	}
+	
+	private void initTeamList() {
+		teamList = new TeamManagerList(100, 100, 200, 400, 5, getMTApplication());
+		teamList.setName("TeamList");
+		for(TeamMember teamMember: teamManager.getTeamMembers()) {
+			TeamMemberListCell cell = new TeamMemberListCell(180, 100, getMTApplication(), teamMember);
+			cell.setName(teamMember.getEmail());
+			teamList.addListElement(cell);
+		}
+		getCanvas().addChild(teamList);
 	}
 
 }
