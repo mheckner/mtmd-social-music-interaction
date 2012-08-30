@@ -6,8 +6,8 @@ import org.mt4j.util.MTColor;
 
 import uniregensburg.medieninformatik.examples.teammanager.model.TeamManager;
 import uniregensburg.medieninformatik.examples.teammanager.model.TeamMember;
-import uniregensburg.medieninformatik.examples.teammanager.ui_assets.TeamManagerList;
-import uniregensburg.medieninformatik.examples.teammanager.ui_assets.TeamMemberListCell;
+import uniregensburg.medieninformatik.examples.teammanager.ui.TeamManagerList;
+import uniregensburg.medieninformatik.examples.teammanager.ui.TeamMemberListCell;
 
 
 public class TeamManagerScene extends AbstractScene {
