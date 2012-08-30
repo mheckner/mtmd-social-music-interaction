@@ -1,4 +1,4 @@
-package uniregensburg.medieninformatik.examples.teammanager.ui_assets;
+package uniregensburg.medieninformatik.examples.teammanager.ui;
 
 import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.widgets.MTListCell;
