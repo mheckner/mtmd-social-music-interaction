@@ -63,7 +63,7 @@ public class MDMCommunicationServer {
 			try {
 				welcomeSocket = new ServerSocket(
 						MDMCommunicationServer.SERVERPORT);
-				connectionSocket = welcomeSocket.accept();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -73,10 +73,11 @@ public class MDMCommunicationServer {
 		public void run() {
 			while (true) {
 				try {
+					connectionSocket = welcomeSocket.accept();
 					inFromClient = new BufferedReader(new InputStreamReader(
 							connectionSocket.getInputStream()));
 					String in = inFromClient.readLine();
-					
+				
 					String[] msg_parts = in.split("###");
 					String sender_id = msg_parts[0];
 					String sender_ip = msg_parts[1];
@@ -85,10 +86,20 @@ public class MDMCommunicationServer {
 					int message_type = Integer.parseInt(msg_parts[4]);
 					String message_content = msg_parts[5];
 					
-					MDMMessage msg = new MDMMessage(sender_id, sender_ip, recepients, receiver_id, message_type, message_content);
+					MDMMessage msg = new MDMMessage();
+					msg.setMessage_content(message_content);
+					msg.setMessage_type(message_type);
+					msg.setReceiver_id(receiver_id);
+					msg.setRecepients(recepients);
+					msg.setSender_id(sender_id);
+					msg.setSender_ip(sender_ip);
+					
+					send("\n");
 					
 					processMessage(msg);
 				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (NullPointerException e) {
 					e.printStackTrace();
 				}
 			}

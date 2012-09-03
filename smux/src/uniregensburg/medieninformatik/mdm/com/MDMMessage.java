@@ -8,22 +8,14 @@ public class MDMMessage {
 	public static final int MESSAGE_TYPE_CONNECTED = 0;
 	public static final int MESSAGE_TYPE_DISCONNECTED = 1;
 	
-	private String sender_id;
-	private String sender_ip;
-	private int recepients;
-	private String receiver_id;
-	private int message_type;
-	private String message_content;
-	
-	public MDMMessage(String sender_id, String sender_ip, int recepients, String receiver_id,
-			int message_type, String message_content) {
-		super();
-		this.sender_id = sender_id;
-		this.sender_ip = sender_ip;
-		this.recepients = recepients;
-		this.receiver_id = receiver_id;
-		this.message_type = message_type;
-		this.message_content = message_content;
+	private String sender_id = "-";
+	private String sender_ip = "-";
+	private int recepients = -1;
+	private String receiver_id = "-";
+	private int message_type = -1;
+	private String message_content = "-";
+
+	public MDMMessage() {
 	}
 
 	public String getSender_id() {
@@ -48,6 +40,35 @@ public class MDMMessage {
 
 	public String getMessage_content() {
 		return message_content;
+	}
+	
+	public void setSender_id(String sender_id) {
+		this.sender_id = sender_id;
+	}
+
+	public void setSender_ip(String sender_ip) {
+		this.sender_ip = sender_ip;
+	}
+
+	public void setRecepients(int recepients) {
+		this.recepients = recepients;
+	}
+
+	public void setReceiver_id(String receiver_id) {
+		this.receiver_id = receiver_id;
+	}
+
+	public void setMessage_type(int message_type) {
+		this.message_type = message_type;
+	}
+
+	public void setMessage_content(String message_content) {
+		this.message_content = message_content;
+	}
+
+	//TODO JSON
+	public String toString() {
+		return sender_id+"###"+sender_ip+"###"+recepients+"###"+receiver_id+"###"+message_type+"###"+message_content;
 	}
 	
 }

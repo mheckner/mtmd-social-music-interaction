@@ -32,9 +32,9 @@ public class MDMManager extends MDMListener implements MDMOnDeviceListener {
 
 	// TODO put in abstract class
 	private void init() {
+		devices = new ArrayList<MDMAbstractDevice>();
 		com = MDMCommunicationServer.getInstance();
 		com.startServer();
-		devices = new ArrayList<MDMAbstractDevice>();
 		registerOnDeviceListener(this);
 	}
 
